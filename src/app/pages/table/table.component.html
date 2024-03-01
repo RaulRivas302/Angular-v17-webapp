@@ -1,0 +1,37 @@
+
+<button class="back-button" (click)="backtoMain()" >Back</button>
+<div *ngIf="!isLoading" class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th (click)="toggleSort('createdAt')">Created At</th>
+        <th (click)="toggleSort('updatedAt')">Updated At</th>
+        <th (click)="toggleSort('title')">Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let issue of issues">
+        <td>{{ issue.createdAt | date: 'medium' }}</td>
+        <td>{{ issue.updatedAt | date: 'medium' }}</td>
+        <td>{{ issue.title }}</td>
+      </tr>
+    </tbody>
+
+  </table>
+<!-- Pagination Controls -->
+<div class="pagination-controls" *ngIf="!isLoading">
+  {{ getItemRangeText() }}
+  <!-- <span>Page {{ currentPage }}</span> -->
+  <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+    <span>&lt;</span> <!-- Left arrow -->
+  </button>
+  <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage * itemsPerPage >= totalItems">
+    <span>&gt;</span> 
+  </button>
+</div>
+</div>
+
+
+
+
+
